@@ -7,7 +7,7 @@ CORS(app)
 
 @app.route('/')
 def home():
-    return 'Distraction flagger backend. Check out the /check-distraction endpoint'
+    return 'Distraction flagger backend. Check out the /check-distraction endpoint to see what this returns'
 
 @app.route('/about')
 def about():
