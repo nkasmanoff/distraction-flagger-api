@@ -41,10 +41,10 @@ def check_relevance(_input,_topic):
     """
 
     # split the input into words
-    input_words = _input.split()
+    input_words = _input.lower().split()
 
     # split the topic into words
-    topic_words = _topic.split()
+    topic_words = _topic.lower().split()
 
     # get the word overlap between the input and topic
     overlap = set(input_words).intersection(set(topic_words))
