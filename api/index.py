@@ -23,7 +23,8 @@ def check_distraction():
     if _input is None:
         return {'result':1}
     _topic = request.args.get('topic')
-
+    if _topic is None:
+        return {'result':1}
     # pass the input and topic to the model
     output = check_relevance(_input, _topic)
 
