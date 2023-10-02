@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return 'Hello, World!'
+    return 'Distraction flagger backend. Check out the /check-distraction endpoint'
 
 @app.route('/about')
 def about():
