@@ -25,7 +25,7 @@ def check_distraction():
     if _input is None:
         return {'result':1}
     # pass the input and topic to the model
-    
+
     output = check_relevance(_input)
 
     # return the output as a json object
@@ -46,4 +46,5 @@ def check_relevance(_input):
     model = pickle.load(open('api/focus_model.pkl', 'rb'))
     tfidf = pickle.load(open('api/tfidf.pkl', 'rb'))
     prediction = model.predict(tfidf.transform([_input]))
+    print("prediction: ", prediction)
     return prediction[0]
