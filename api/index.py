@@ -1,5 +1,7 @@
 from flask import Flask, request
 from flask_cors import CORS
+import pickle
+
 
 
 app = Flask(__name__)
@@ -22,18 +24,16 @@ def check_distraction():
     _input = request.args.get('input')
     if _input is None:
         return {'result':1}
-    _topic = request.args.get('topic')
-    if _topic is None:
-        return {'result':1}
     # pass the input and topic to the model
-    output = check_relevance(_input, _topic)
+    
+    output = check_relevance(_input)
 
     # return the output as a json object
     return {'result': output}
 
 
 
-def check_relevance(_input,_topic):
+def check_relevance(_input):
     """
     Simple rule based approach for checking if a webpage is on topic or not. 
 
@@ -43,17 +43,7 @@ def check_relevance(_input,_topic):
     
     """
 
-    # split the input into words
-    input_words = _input.lower().split()
-
-    # split the topic into words
-    topic_words = _topic.lower().split()
-
-    # get the word overlap between the input and topic
-    overlap = set(input_words).intersection(set(topic_words))
-
-    # if there is at least one word from the topic in the input, return 0. Otherwise, return 1
-    if len(overlap) > 0:
-        return 0
-    else:
-        return 1
+    model = pickle.load(open('api/focus_model.pkl', 'rb'))
+    tfidf = pickle.load(open('api/tfidf.pkl', 'rb'))
+    prediction = model.predict(tfidf.transform([_input]))
+    return prediction[0]
