@@ -1,7 +1,7 @@
 from flask import Flask, request
 from flask_cors import CORS
-import pickle
-import random 
+from .distractionpredictor.model import LogisticRegression, TFIDF
+
 
 
 app = Flask(__name__)
@@ -33,7 +33,7 @@ def check_distraction():
 
 
 
-def check_relevance(_input):
+def check_relevance(_input,threshold=.15):
     """
     Simple rule based approach for checking if a webpage is on topic or not. 
 
@@ -42,6 +42,16 @@ def check_relevance(_input):
     If there is at least one word from the topic in the input, returns 0. Otherwise, returns 1
 
     """
-    prediction = random.choice([0,1])
+    tfidf = TFIDF()
+    tfidf.load_model('distractionpredictor/tfidf.pkl')
+    lr = LogisticRegression()
+    lr.load_model('distractionpredictor/lr.pkl')
+    prediction = lr.predict(tfidf.transform([_input]), probabilities=True)[0]
     print("prediction: ", prediction)
+
+    if prediction < threshold:
+        prediction = 1
+    else:
+        prediction = 0        
+
     return prediction
