@@ -47,7 +47,7 @@ def check_relevance(_input,threshold=.15):
     tfidf = tfidf.load_model('api/storage/tfidf.pkl')
 
     print("Input: ", _input)
-    prediction = lr.predict(tfidf.transform([_input]), probabilities=True)[0]
+    prediction = lr.predict(tfidf.transform([str(_input)]), probabilities=True)[0]
     #print("prediction: ", prediction)
 
     if any([phrase.lower() in _input.lower() for phrase in keyword_list]):
