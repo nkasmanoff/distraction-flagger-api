@@ -41,13 +41,13 @@ def check_relevance(_input,threshold=.15):
     If there is at least one word from the topic in the input, returns 0. Otherwise, returns 1
 
     """
-    #lr = LogisticRegression()
-    #lr = lr.load_model('api/storage/model.pkl')
-    #tfidf = TFIDF()
-    #tfidf = tfidf.load_model('api/storage/tfidf.pkl')
+    lr = LogisticRegression()
+    lr = lr.load_model('api/storage/model.pkl')
+    tfidf = TFIDF()
+    tfidf = tfidf.load_model('api/storage/tfidf.pkl')
 
-
-    #prediction = lr.predict(tfidf.transform([_input]), probabilities=True)[0]
+    print("Input: ", _input)
+    prediction = lr.predict(tfidf.transform([_input]), probabilities=True)[0]
     #print("prediction: ", prediction)
 
     if any([phrase.lower() in _input.lower() for phrase in keyword_list]):
