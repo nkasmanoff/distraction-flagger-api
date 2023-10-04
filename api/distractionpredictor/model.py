@@ -1,5 +1,4 @@
 import numpy as np 
-import pickle
 import dill
 
 class TFIDF:
@@ -72,7 +71,6 @@ class LogisticRegression:
             # calculate predicted probabilities and cost
             z = np.dot(X, self.weights) + self.bias
             y_pred = self._sigmoid(z)
-            cost = (-1 / n_samples) * np.sum(y * np.log(y_pred) + (1 - y) * np.log(1 - y_pred))
             
             # calculate gradients
             dw = (1 / n_samples) * np.dot(X.T, (y_pred - y))            

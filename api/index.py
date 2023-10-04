@@ -3,7 +3,6 @@ from flask_cors import CORS
 from .distractionpredictor.model import LogisticRegression, TFIDF
 
 
-
 app = Flask(__name__)
 CORS(app)
 
