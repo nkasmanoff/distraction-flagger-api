@@ -1,5 +1,6 @@
 import numpy as np 
 import pickle
+import dill
 
 class TFIDF:
     def __init__(self):
@@ -36,11 +37,11 @@ class TFIDF:
     
     def save_model(self, path):
         with open(path, 'wb') as f:
-            pickle.dump(self, f)
+            dill.dump(self, f)
         
     def load_model(self, path):
         with open(path, 'rb') as f:
-            self = pickle.load(f)
+            self = dill.load(f)
         return self
     
 
@@ -96,10 +97,10 @@ class LogisticRegression:
 
     def save_model(self, path):
         with open(path, 'wb') as f:
-            pickle.dump(self, f)
+            dill.dump(self, f)
 
     def load_model(self, path):
         with open(path, 'rb') as f:
-            self = pickle.load(f)
+            self = dill.load(f)
         return self
     
