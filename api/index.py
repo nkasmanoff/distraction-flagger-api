@@ -58,12 +58,3 @@ def check_relevance(_input,threshold=.15):
 
     return prediction
 
-
-if __name__ == '__main__':
-    tfidf = TFIDF()
-    tfidf = tfidf.load_model('api/storage/tfidf.pkl')
-    lr = LogisticRegression()
-    lr = lr.load_model('api/storage/model.pkl')
-    prediction = lr.predict(tfidf.transform(['test']), probabilities=True)[0]
-
-    print("prediction: ", prediction)
