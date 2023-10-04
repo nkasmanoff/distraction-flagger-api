@@ -45,7 +45,7 @@ def check_relevance(_input,threshold=.15):
     tfidf = TFIDF()
     tfidf = tfidf.load_model('api/storage/tfidf.pkl')
     lr = LogisticRegression()
-    lr.load_model('api/storage/model.pkl')
+    lr = lr.load_model('api/storage/model.pkl')
     prediction = lr.predict(tfidf.transform([_input]), probabilities=True)[0]
     print("prediction: ", prediction)
 
