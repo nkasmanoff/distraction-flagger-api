@@ -1,7 +1,7 @@
 from flask import Flask, request
 from flask_cors import CORS
 from .distractionpredictor.model import LogisticRegression, TFIDF
-
+from .distractionpredictor.keywords import keyword_list
 
 app = Flask(__name__)
 CORS(app)
@@ -41,19 +41,19 @@ def check_relevance(_input,threshold=.15):
     If there is at least one word from the topic in the input, returns 0. Otherwise, returns 1
 
     """
-    lr = LogisticRegression()
-    lr = lr.load_model('api/storage/model.pkl')
-    tfidf = TFIDF()
-    tfidf = tfidf.load_model('api/storage/tfidf.pkl')
+    #lr = LogisticRegression()
+    #lr = lr.load_model('api/storage/model.pkl')
+    #tfidf = TFIDF()
+    #tfidf = tfidf.load_model('api/storage/tfidf.pkl')
 
 
-    prediction = lr.predict(tfidf.transform([_input]), probabilities=True)[0]
-    print("prediction: ", prediction)
+    #prediction = lr.predict(tfidf.transform([_input]), probabilities=True)[0]
+    #print("prediction: ", prediction)
 
-    if prediction < threshold:
-        prediction = 1
+    if any([word in _input for word in keyword_list]):
+        prediction = 0
     else:
-        prediction = 0        
-
+        prediction = 1
+        
     return prediction
 
