@@ -50,10 +50,10 @@ def check_relevance(_input,threshold=.15):
     #prediction = lr.predict(tfidf.transform([_input]), probabilities=True)[0]
     #print("prediction: ", prediction)
 
-    if any([word in _input for word in keyword_list]):
+    if any([phrase.lower() in _input.lower() for phrase in keyword_list]):
         prediction = 0
     else:
         prediction = 1
-        
+
     return prediction
 
