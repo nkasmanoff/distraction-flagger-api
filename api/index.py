@@ -44,4 +44,4 @@ def check_relevance(_input):
     """
     prediction = random.choice([0,1])
     print("prediction: ", prediction)
-    return prediction[0]
+    return prediction
