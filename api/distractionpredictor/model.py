@@ -1,11 +1,5 @@
-import numpy as np 
-import dill
-
-
 class TFIDF:
-
     def __init__(self):
-
         self.documents = None
         self.vocab = None
         self.idf = None
@@ -29,6 +23,7 @@ class TFIDF:
     
     def transform(self, documents):
         import numpy as np
+
         tfidf = np.zeros((len(documents), len(self.vocab)))
         for i, doc in enumerate(documents):
             for j, word in enumerate(self.vocab):
@@ -40,10 +35,12 @@ class TFIDF:
         return self.tfidf
     
     def save_model(self, path):
+        import dill
         with open(path, 'wb') as f:
             dill.dump(self, f)
         
     def load_model(self, path):
+        import dill
         with open(path, 'rb') as f:
             self = dill.load(f)
         return self
@@ -52,15 +49,11 @@ class TFIDF:
 
 
 
+
+
 class LogisticRegression:
-    """
-    Adapted from https://github.com/alirezadir/Machine-Learning-Interviews/blob/main/src/MLC/notebooks/logistic_regression.ipynb
-
-    Logistic regression classifier which uses gradient descent to optimize the weights and bias
-    Doesn't do anything too fancy, just runs until max iterations is reached.
-    """
-
-    def __init__(self, learning_rate=0.01, n_iters=10000):
+    
+    def __init__(self, learning_rate=0.01, n_iters=5000):
         self.learning_rate = learning_rate
         self.n_iters = n_iters
         self.weights = None
@@ -78,6 +71,7 @@ class LogisticRegression:
             # calculate predicted probabilities and cost
             z = np.dot(X, self.weights) + self.bias
             y_pred = self._sigmoid(z)
+            cost = (-1 / n_samples) * np.sum(y * np.log(y_pred) + (1 - y) * np.log(1 - y_pred))
             
             # calculate gradients
             dw = (1 / n_samples) * np.dot(X.T, (y_pred - y))            
@@ -101,13 +95,16 @@ class LogisticRegression:
     def _sigmoid(self, z):
         import numpy as np
         return 1 / (1 + np.exp(-z))
-
+    
     def save_model(self, path):
+        import dill
         with open(path, 'wb') as f:
             dill.dump(self, f)
 
     def load_model(self, path):
+        import dill
         with open(path, 'rb') as f:
             self = dill.load(f)
         return self
     
+
