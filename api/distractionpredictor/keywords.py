@@ -1,1 +1,1 @@
-keyword_list = ['job','machine learning','data science','ml','ai','llm']
+keyword_list = ['job','machine learning','data science','ml','ai','llm','apply','learn']
