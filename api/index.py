@@ -1,7 +1,7 @@
 from flask import Flask, request
 from flask_cors import CORS
 import pickle
-
+import random 
 
 
 app = Flask(__name__)
@@ -40,11 +40,8 @@ def check_relevance(_input):
     Gets the word overlap between the input and topic. 
     
     If there is at least one word from the topic in the input, returns 0. Otherwise, returns 1
-    
-    """
 
-    model = pickle.load(open('api/focus_model.pkl', 'rb'))
-    tfidf = pickle.load(open('api/tfidf.pkl', 'rb'))
-    prediction = model.predict(tfidf.transform([_input]))
+    """
+    prediction = random.choice([0,1])
     print("prediction: ", prediction)
     return prediction[0]

@@ -13,3 +13,5 @@ env.bak/
 venv.bak/ 
 
 *.xlsx
+
+**.DS_Store
