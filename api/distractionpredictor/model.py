@@ -13,6 +13,7 @@ class TFIDF:
         self.tfidf = None
 
     def fit(self, documents):
+        import numpy as np
         self.documents = documents
         self.vocab = list(set([word for doc in documents for word in doc.split()]))
         self.idf = np.zeros(len(self.vocab))
@@ -27,6 +28,7 @@ class TFIDF:
         self.tfidf = self.tf * self.idf
     
     def transform(self, documents):
+        import numpy as np
         tfidf = np.zeros((len(documents), len(self.vocab)))
         for i, doc in enumerate(documents):
             for j, word in enumerate(self.vocab):
@@ -65,6 +67,7 @@ class LogisticRegression:
         self.bias = None
         
     def fit(self, X, y):
+        import numpy as np
         # initialize weights and bias to zeros
         n_samples, n_features = X.shape
         self.weights = np.zeros(n_features)
@@ -85,6 +88,7 @@ class LogisticRegression:
             self.bias -= self.learning_rate * db
             
     def predict(self, X,probabilities=False):
+        import numpy as np
         # calculate predicted probabilities
         z = np.dot(X, self.weights) + self.bias
         y_pred = self._sigmoid(z)
@@ -95,6 +99,7 @@ class LogisticRegression:
         return np.round(y_pred).astype(int)
 
     def _sigmoid(self, z):
+        import numpy as np
         return 1 / (1 + np.exp(-z))
 
     def save_model(self, path):
